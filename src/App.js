@@ -19,8 +19,8 @@ class App extends Component {
             },
             {
               username:"Dave",
-              blogCountry:countryList.getName('EN'),
-              blogHomeTown:"London",
+              blogCountry:countryList.getName('GB'),
+              blogRegion:"London",
               blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
               resterauntRecommendationText:"Nandos",
               resterauntLink:"www.nandos.co.uk",
@@ -32,7 +32,7 @@ class App extends Component {
             {
               username:"Sarah",
               blogCountry:countryList.getName('BR'),
-              blogHomeTown:"Sao Paulo",
+              blogRegion:"Sao Paulo",
               blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
               resterauntRecommendationText:"Pizza Express",
               resterauntLink:"www.pizzaexpress.com",
