@@ -11,17 +11,17 @@ render(){
             <p>{this.props.blog_text}</p>
             <p>Recommendations: </p> 
             <p><a  className="App-link"
-                href = {this.props.rest_link}
+                href = {"https://" + this.props.rest_link}
                 target="_blank"
                 rel="noopener noreferrer"
             >{this.props.rest_name}</a></p>
             <p><a  className="App-link"
-                href = {this.props.hotel_link}
+                href = {"https://" + this.props.hotel_link}
                 target="_blank"
                 rel="noopener noreferrer"
             >{this.props.hotel_name}</a></p>
             <p><a  className="App-link"
-                href = {this.props.attract_link}
+                href = {"https://" + this.props.attract_link}
                 target="_blank"
                 rel="noopener noreferrer"
             >{this.props.attract_name}</a></p>
