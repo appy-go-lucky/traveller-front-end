@@ -1,48 +1,64 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from "axios";
 const countryList = require('country-list');
 
 class App extends Component {
 
   state = {
-    blogs: [{
-              username:"Brian",
-              blogCountry:countryList.getName('TW'),
-              blogRegion:"Manchester",
-              blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
-              resterauntRecommendationText:"Tony Romas",
-              resterauntLink:"www.tonyromas.com",
-              hotelRecommendationText:"Best Western",
-              hotelLink:"www.bestwestern.co.uk",
-              attractionText:"Alton Towers",
-              attractionLink:"https://www.altontowers.com/"
-            },
-            {
-              username:"Dave",
-              blogCountry:countryList.getName('GB'),
-              blogRegion:"London",
-              blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
-              resterauntRecommendationText:"Nandos",
-              resterauntLink:"www.nandos.co.uk",
-              hotelRecommendationText:"Hilton",
-              hotelLink:"https://www.hilton.com/",
-              attractionText:"Madam Tussauds",
-              attractionLink:"https://www.madametussauds.com/"
-            },
-            {
-              username:"Sarah",
-              blogCountry:countryList.getName('BR'),
-              blogRegion:"Sao Paulo",
-              blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
-              resterauntRecommendationText:"Pizza Express",
-              resterauntLink:"www.pizzaexpress.com",
-              hotelRecommendationText:"Travelodge",
-              hotelLink:"www.travelodge.co.uk",
-              attractionText:"Stone Hendge",
-              attractionLink:"https://www.english-heritage.org.uk/visit/places/stonehenge/"
-            }
-          ]
+    blogs: []
+    //           username:"Brian",
+    //           blogCountry:countryList.getName('TW'),
+    //           blogRegion:"Manchester",
+    //           blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
+    //           resterauntRecommendationText:"Tony Romas",
+    //           resterauntLink:"www.tonyromas.com",
+    //           hotelRecommendationText:"Best Western",
+    //           hotelLink:"www.bestwestern.co.uk",
+    //           attractionText:"Alton Towers",
+    //           attractionLink:"https://www.altontowers.com/"
+    //         },
+    //         {
+    //           username:"Dave",
+    //           blogCountry:countryList.getName('GB'),
+    //           blogRegion:"London",
+    //           blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
+    //           resterauntRecommendationText:"Nandos",
+    //           resterauntLink:"www.nandos.co.uk",
+    //           hotelRecommendationText:"Hilton",
+    //           hotelLink:"https://www.hilton.com/",
+    //           attractionText:"Madam Tussauds",
+    //           attractionLink:"https://www.madametussauds.com/"
+    //         },
+    //         {
+    //           username:"Sarah",
+    //           blogCountry:countryList.getName('BR'),
+    //           blogRegion:"Sao Paulo",
+    //           blogText:"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt explicabo commodi eos dignissimos libero, quam expedita quas in molestiae minus fuga dolor, provident doloribus quae reprehenderit aliquam nam eaque.",
+    //           resterauntRecommendationText:"Pizza Express",
+    //           resterauntLink:"www.pizzaexpress.com",
+    //           hotelRecommendationText:"Travelodge",
+    //           hotelLink:"www.travelodge.co.uk",
+    //           attractionText:"Stone Hendge",
+    //           attractionLink:"https://www.english-heritage.org.uk/visit/places/stonehenge/"
+    //         }
+          // ]
   }  
+
+  componentWillMount(){
+    this.getBlogs();
+  }
+
+  getBlogs(){
+      axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
+      .then(response => {
+       this.setState({blogs:response.data.blogs})
+       })
+       .catch(function (error) {
+       console.log(error);
+       })
+  }
+
 
   render(){
     return (
@@ -53,7 +69,7 @@ class App extends Component {
                   <p>Username: {element.username}</p>
                   <p>blog country: {element.blogCountry}</p>
                   <p>blog region: {element.blogRegion}</p>
-                  <p>{element.blogText}</p>
+                  <p>{element.blog_text}</p>
                   <p>Recommendations: {element.resterauntRecommendationText}</p>
                   <p>{element.resterauntLink}</p>
                   <p>{element.hotelRecommendationText}</p>
