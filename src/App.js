@@ -39,7 +39,7 @@ class App extends Component {
                       rest_link={element.rest_link}
                       hotel_name={element.hotel_name}
                       hotel_link={element.hotel_link}
-                      attract_text={element.attract_text}
+                      attract_name={element.attract_name}
                       attract_link={element.attract_link} />
                    )
             })
