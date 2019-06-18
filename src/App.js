@@ -33,7 +33,7 @@ class App extends Component {
     if ((blog_country_name === undefined) || (blog_country_name === "Select the blog country")){
       alert("select  country");
     }else{
-    axios.post('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller',{
+    axios.post('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
       user_id:parseInt(user_id),
       blog_city:blog_city,
       blog_country_name:blog_country_name,
