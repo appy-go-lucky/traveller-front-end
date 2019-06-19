@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 class ShowBlogs extends Component{
 
+deleteBlogClicked = () => {
+        this.props.deleteBlogFunction(this.props.blog_id);
+    }
+
 render(){
     return (
         <div>
@@ -25,6 +29,10 @@ render(){
                 target="_blank"
                 rel="noopener noreferrer"
             >{this.props.attract_name}</a></p>
+            {/* <div className="col-md-2 col-12 text-center"><button className="btn btn-secondary"  
+                type="button"onClick={this.modifyBlogClicked}>modify blog</button></div> */}
+            <div className="col-md-2 col-12 text-center"><button className="btn btn-secondary" 
+                type="button"onClick={this.deleteBlogClicked}>delete blog</button></div>    
         </div>
     ) 
   }

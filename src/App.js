@@ -46,18 +46,25 @@ class App extends Component {
       attract_link:attractLink  
      })
     .then(() => {
-      console.log("got here")
       this.getBlogs();
     })
     .catch(function (error) {
-      console.log("error here")
       console.log(error);
     });
     }
   }
-  
-  
 
+  deleteBlog = (blogId) =>{
+    axios.delete(`https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog/${blogId}`)
+    .then(() =>{
+      this.getBlogs();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  
+  
   render(){
     return (
       <div>
@@ -66,6 +73,7 @@ class App extends Component {
           this.state.blogs.map((element, index)=>{ 
             return(  
               <ShowBlogs  key={index}
+                      blog_id={element.blog_id}
                       user_name={element.user_name}
                       blog_country_name={element.blog_country_name}
                       blog_city={element.blog_city}
@@ -75,7 +83,8 @@ class App extends Component {
                       hotel_name={element.hotel_name}
                       hotel_link={element.hotel_link}
                       attract_name={element.attract_name}
-                      attract_link={element.attract_link} />
+                      attract_link={element.attract_link} 
+                      deleteBlogFunction={this.deleteBlog}/>
                    )
             })
           }
