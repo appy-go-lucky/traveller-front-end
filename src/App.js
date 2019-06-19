@@ -3,7 +3,6 @@ import './App.css';
 import axios from "axios";
 import ShowBlogs from './components/ShowBlogs';
 import GetBlogs from './components/GetBlogs';
-const countryList = require('country-list');
 
 class App extends Component {
 
@@ -18,41 +17,46 @@ class App extends Component {
   getBlogs(){
       axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
       .then(response => {
-       this.setState({blogs:response.data.blogs})
+        let sortedBlogs = response.data.blogs;
+        sortedBlogs.sort((a, b) => parseFloat(a.blog_id) - parseFloat(b.blog_id));
+       this.setState({blogs:sortedBlogs})
        })
        .catch(function (error) {
        console.log(error);
        })
   }
 
-  addBlog(user_id, blog_country_name, blog_text, blog_city, hotel_name, hotel_link, rest_name, 
-    rest_link, attract_name, attract_link){
-    if ((user_id === undefined) || (user_id === "0")){
+  addBlog = (userId, blogCountryName, blogText, blogCity, hotelName, hotelLink, restName, restLink, attractName, attractLink)=>{
+    if ((userId === undefined) || (userId === "0")){
       alert("select  user");
     }
-    if ((blog_country_name === undefined) || (blog_country_name === "Select the blog country")){
+    if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")){
       alert("select  country");
     }else{
-    axios.post('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
-      user_id:parseInt(user_id),
-      blog_city:blog_city,
-      blog_country_name:blog_country_name,
-      blog_text:blog_text,
-      hotel_name:hotel_name,
-      hotel_link:hotel_link,
-      rest_name:rest_name,
-      rest_link:rest_link,
-      attract_name:attract_name,
-      attract_link:attract_link  
-    })
-    .then(response => {
+      axios.post('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
+      blog_text:blogText,      
+      blog_country_name:blogCountryName,
+      blog_city:blogCity,
+      user_id:parseInt(userId),
+      hotel_name:hotelName,
+      hotel_link:hotelLink,
+      rest_name:restName,
+      rest_link:restLink,
+      attract_name:attractName,
+      attract_link:attractLink  
+     })
+    .then(() => {
+      console.log("got here")
       this.getBlogs();
     })
     .catch(function (error) {
+      console.log("error here")
       console.log(error);
     });
     }
   }
+  
+  
 
   render(){
     return (
