@@ -3,11 +3,15 @@ import './App.css';
 import axios from "axios";
 import ShowBlogs from './components/ShowBlogs';
 import GetBlogs from './components/GetBlogs';
+import EditBlog from './components/EditBlog';
+
 
 class App extends Component {
 
   state = {
-    blogs: [],
+    blogs:[],
+    isABlogInEditing: false, 
+    blogIdInEditing: 0
   }  
 
   componentWillMount(){
@@ -63,16 +67,40 @@ class App extends Component {
       console.log(error);
     });
   }
-  
+
+  modifyBlog = (blogId) =>{
+    if(this.state.isABlogInEditing === true){
+      alert("A blog is already in editing, please try again later")
+    }else{
+    this.setState({isABlogInEditing: true, blogIdInEditing:blogId})
+    }
+  }
   
   render(){
     return (
       <div>
         <GetBlogs addBlogFunction={this.addBlog}/>
         {
-          this.state.blogs.map((element, index)=>{ 
-            return(  
-              <ShowBlogs  key={index}
+          this.state.blogs.map((element, index)=>{
+            if(this.state.isABlogInEditing){
+              if(this.state.blogIdInEditing === element.blog_id){
+                return <EditBlog 
+                      key={index}
+                      blog_id={element.blog_id}
+                      user_name={element.user_name}
+                      blog_country_name={element.blog_country_name}
+                      blog_city={element.blog_city}
+                      blog_text={element.blog_text}
+                      rest_name={element.rest_name}
+                      rest_link={element.rest_link}
+                      hotel_name={element.hotel_name}
+                      hotel_link={element.hotel_link}
+                      attract_name={element.attract_name}
+                      attract_link={element.attract_link} />
+              }
+            } else{
+              return(  
+                <ShowBlogs  key={index}
                       blog_id={element.blog_id}
                       user_name={element.user_name}
                       blog_country_name={element.blog_country_name}
@@ -84,8 +112,10 @@ class App extends Component {
                       hotel_link={element.hotel_link}
                       attract_name={element.attract_name}
                       attract_link={element.attract_link} 
-                      deleteBlogFunction={this.deleteBlog}/>
+                      deleteBlogFunction={this.deleteBlog}
+                      modifyBlogFunction={this.modifyBlog}/>
                    )
+              }
             })
           }
       </div>
