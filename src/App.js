@@ -75,6 +75,11 @@ class App extends Component {
     this.setState({isABlogInEditing: true, blogIdInEditing:blogId})
     }
   }
+
+
+  discardChanges = () =>{
+    this.setState({isABlogInEditing: false, blogIdInEditing:0})
+  }
   
   render(){
     return (
@@ -96,7 +101,9 @@ class App extends Component {
                       hotel_name={element.hotel_name}
                       hotel_link={element.hotel_link}
                       attract_name={element.attract_name}
-                      attract_link={element.attract_link} />
+                      attract_link={element.attract_link}
+                      saveChangeFunction={this.saveChanges}
+                      discardChangeFunction={this.discardChanges}/>
               }
             } else{
               return(  
