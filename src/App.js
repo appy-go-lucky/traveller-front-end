@@ -30,7 +30,7 @@ class App extends Component {
        })
   }
 
-  addBlog = (userId, blogCountryName, blogText, blogCity, hotelName, hotelLink, restName, restLink, attractName, attractLink)=>{
+  addBlog = (userId, blogCountryName, blogCity, blogText, hotelName, hotelLink, restName, restLink, attractName, attractLink)=>{
     if ((userId === undefined) || (userId === "0")){
       alert("select  user");
     }
@@ -76,6 +76,26 @@ class App extends Component {
     }
   }
 
+  saveChanges = (blogId, blogCountryName, blogCity, blogText)=>{
+    if ((blogCountryName === undefined)){
+      alert("select  country");
+    }else{
+      axios.put('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
+      blog_id:parseInt(blogId),
+      blog_text:blogText,      
+      blog_country_name:blogCountryName,
+      blog_city:blogCity, 
+     })
+    .then(() => {
+      this.getBlogs();
+      this.setState({isABlogInEditing: false, blogIdInEditing:0})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    }
+  }
+
 
   discardChanges = () =>{
     this.setState({isABlogInEditing: false, blogIdInEditing:0})
@@ -92,6 +112,7 @@ class App extends Component {
                 return <EditBlog 
                       key={index}
                       blog_id={element.blog_id}
+                      user_id={element.user_id}
                       user_name={element.user_name}
                       blog_country_name={element.blog_country_name}
                       blog_city={element.blog_city}
