@@ -1,0 +1,11 @@
+Nav {
+color: black; 
+font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+border: 2px solid gray;
+border-style: dotted;
+background-color: white;
+font-weight: normal;
+width: 60%;
+text-align: center;
+margin: 25px auto auto auto;
+}

@@ -4,22 +4,23 @@ import axios from "axios";
 import ShowBlogs from './components/ShowBlogs';
 import GetBlogs from './components/GetBlogs';
 import EditBlog from './components/EditBlog';
+import Nav from './components/Nav';
 
 
 class App extends Component {
 
   state = {
-    blogs:[],
-    isABlogInEditing: false, 
+    blogs: [],
+    isABlogInEditing: false,
     blogIdInEditing: 0
-  }  
+  }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getBlogs();
   }
 
-  getBlogs(){
-      axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
+  getBlogs() {
+    axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
       .then(response => {
         let sortedBlogs = response.data.blogs;
         sortedBlogs.sort((a, b) => parseFloat(b.blog_id) - parseFloat(a.blog_id));
@@ -58,7 +59,7 @@ class App extends Component {
     if ((userId === undefined) || (userId === "0")){
       alert("select  user");
     }
-    if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")){
+    if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")) {
       alert("select  country");
     }else{
       blogCity = this.defaultValuesForForm(blogCity)
@@ -91,21 +92,21 @@ class App extends Component {
     }
   }
 
-  deleteBlog = (blogId) =>{
+  deleteBlog = (blogId) => {
     axios.delete(`https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog/${blogId}`)
-    .then(() =>{
-      this.getBlogs();
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(() => {
+        this.getBlogs();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  modifyBlog = (blogId) =>{
-    if(this.state.isABlogInEditing === true){
+  modifyBlog = (blogId) => {
+    if (this.state.isABlogInEditing === true) {
       alert("A blog is already in editing, please try again later")
-    }else{
-    this.setState({isABlogInEditing: true, blogIdInEditing:blogId})
+    } else {
+      this.setState({ isABlogInEditing: true, blogIdInEditing: blogId })
     }
   }
 
@@ -146,8 +147,13 @@ class App extends Component {
   
   render(){
     return (
+      <div className="App">
+      <Nav text="Talking Travel"/>
+      <div id="subHeader">
+        <h4>Welcome to the travel site that gives you a first-hand account of the places you want to visit</h4>
+        </div>
       <div>
-        <GetBlogs addBlogFunction={this.addBlog}/>
+        <GetBlogs addBlogFunction={this.addBlog} />
         {
           this.state.blogs.map((element, index)=>{
             if(this.state.isABlogInEditing){
@@ -190,8 +196,10 @@ class App extends Component {
                       modifyBlogFunction={this.modifyBlog}/>
                    )
               }
-            })
-          }
+          })
+        }
+
+      </div>
       </div>
     );
   }
