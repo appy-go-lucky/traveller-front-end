@@ -22,13 +22,37 @@ class App extends Component {
       axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
       .then(response => {
         let sortedBlogs = response.data.blogs;
-        sortedBlogs.sort((a, b) => parseFloat(a.blog_id) - parseFloat(b.blog_id));
+        sortedBlogs.sort((a, b) => parseFloat(b.blog_id) - parseFloat(a.blog_id));
        this.setState({blogs:sortedBlogs})
        })
        .catch(function (error) {
        console.log(error);
        })
   }
+
+  checkSwears=(blogText) => {
+    blogText = blogText.split(" ");
+    blogText = blogText.map((word) =>{
+      if((word === "shit") || (word === "cunt") || (word === "fuck") || (word === "twat")||
+        (word === "bastard")|| (word === "arse")){
+          word = "****"
+          return word;
+        }else{
+          return word;
+        }
+      
+    })
+    return blogText.toString().replace(/,/g, ' ');
+  }
+
+  defaultValuesForForm = (element) =>{
+      if (element === undefined){
+        element = "nothing yet entered"
+        return element
+      }else{
+        return element
+      }
+  } 
 
   addBlog = (userId, blogCountryName, blogCity, blogText, hotelName, hotelLink, restName, restLink, attractName, attractLink)=>{
     if ((userId === undefined) || (userId === "0")){
@@ -37,6 +61,15 @@ class App extends Component {
     if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")){
       alert("select  country");
     }else{
+      blogCity = this.defaultValuesForForm(blogCity)
+      blogText = this.defaultValuesForForm(blogText)
+      hotelName = this.defaultValuesForForm(hotelName)
+      hotelLink = this.defaultValuesForForm(hotelLink)
+      restName = this.defaultValuesForForm(restName)
+      restLink = this.defaultValuesForForm(restLink)
+      attractName = this.defaultValuesForForm(attractName)
+      attractLink = this.defaultValuesForForm(attractLink)
+      blogText =  this.checkSwears(blogText);
       axios.post('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
       blog_text:blogText,      
       blog_country_name:blogCountryName,
@@ -76,15 +109,25 @@ class App extends Component {
     }
   }
 
-  saveChanges = (blogId, blogCountryName, blogCity, blogText)=>{
+  saveChanges = (blogId, blogCountryName, blogCity, blogText, restId, restName, restLink, hotelId, hotelName, hotelLink, attractId,attractName, attractLink) =>{
     if ((blogCountryName === undefined)){
       alert("select  country");
     }else{
-      axios.put('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{
+      blogText =  this.checkSwears(blogText);
+      axios.put('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog',{ 
       blog_id:parseInt(blogId),
       blog_text:blogText,      
       blog_country_name:blogCountryName,
       blog_city:blogCity, 
+      rest_id:restId,
+      rest_name:restName,
+      rest_link:restLink,
+      hotel_id:hotelId,
+      hotel_name:hotelName,
+      hotel_link:hotelLink,
+      attract_id:attractId,
+      attract_name:attractName,
+      attract_link:attractLink
      })
     .then(() => {
       this.getBlogs();
@@ -117,10 +160,13 @@ class App extends Component {
                       blog_country_name={element.blog_country_name}
                       blog_city={element.blog_city}
                       blog_text={element.blog_text}
+                      rest_id={element.rest_id}
                       rest_name={element.rest_name}
                       rest_link={element.rest_link}
+                      hotel_id={element.hotel_id}
                       hotel_name={element.hotel_name}
                       hotel_link={element.hotel_link}
+                      attract_id={element.attract_id}
                       attract_name={element.attract_name}
                       attract_link={element.attract_link}
                       saveChangeFunction={this.saveChanges}
