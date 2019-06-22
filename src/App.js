@@ -110,7 +110,6 @@ class App extends Component {
     }
   }
 
-
   saveChanges = (blogId, blogCountryName, blogCity, blogText, restId, restName, restLink, hotelId, hotelName, hotelLink, attractId,attractName, attractLink) =>{
     if ((blogCountryName === undefined)){
       alert("select  country");
@@ -179,26 +178,27 @@ class App extends Component {
                       saveChangeFunction={this.saveChanges}
                       discardChangeFunction={this.discardChanges}/>
               }
-            } else {
-              return (
-                <ShowBlogs key={index}
-                  blog_id={element.blog_id}
-                  user_name={element.user_name}
-                  blog_country_name={element.blog_country_name}
-                  blog_city={element.blog_city}
-                  blog_text={element.blog_text}
-                  rest_name={element.rest_name}
-                  rest_link={element.rest_link}
-                  hotel_name={element.hotel_name}
-                  hotel_link={element.hotel_link}
-                  attract_name={element.attract_name}
-                  attract_link={element.attract_link}
-                  deleteBlogFunction={this.deleteBlog}
-                  modifyBlogFunction={this.modifyBlog} />
-              )
-            }
+            } else{
+              return(  
+                <ShowBlogs  key={index}
+                      blog_id={element.blog_id}
+                      user_name={element.user_name}
+                      blog_country_name={element.blog_country_name}
+                      blog_city={element.blog_city}
+                      blog_text={element.blog_text}
+                      rest_name={element.rest_name}
+                      rest_link={element.rest_link}
+                      hotel_name={element.hotel_name}
+                      hotel_link={element.hotel_link}
+                      attract_name={element.attract_name}
+                      attract_link={element.attract_link} 
+                      deleteBlogFunction={this.deleteBlog}
+                      modifyBlogFunction={this.modifyBlog}/>
+                   )
+              }
           })
         }
+      </div>
       </div>
     );
   }
