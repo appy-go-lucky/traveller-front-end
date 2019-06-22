@@ -4,22 +4,23 @@ import axios from "axios";
 import ShowBlogs from './components/ShowBlogs';
 import GetBlogs from './components/GetBlogs';
 import EditBlog from './components/EditBlog';
+import Nav from './components/Nav';
 
 
 class App extends Component {
 
   state = {
-    blogs:[],
-    isABlogInEditing: false, 
+    blogs: [],
+    isABlogInEditing: false,
     blogIdInEditing: 0
-  }  
+  }
 
-  componentWillMount(){
+  componentWillMount() {
     this.getBlogs();
   }
 
-  getBlogs(){
-      axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
+  getBlogs() {
+    axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
       .then(response => {
         let sortedBlogs = response.data.blogs;
         sortedBlogs.sort((a, b) => parseFloat(b.blog_id) - parseFloat(a.blog_id));
@@ -58,7 +59,7 @@ class App extends Component {
     if ((userId === undefined) || (userId === "0")){
       alert("select  user");
     }
-    if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")){
+    if ((blogCountryName === undefined) || (blogCountryName === "Select the blog country")) {
       alert("select  country");
     }else{
       blogCity = this.defaultValuesForForm(blogCity)
@@ -91,23 +92,24 @@ class App extends Component {
     }
   }
 
-  deleteBlog = (blogId) =>{
+  deleteBlog = (blogId) => {
     axios.delete(`https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog/${blogId}`)
-    .then(() =>{
-      this.getBlogs();
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(() => {
+        this.getBlogs();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
-  modifyBlog = (blogId) =>{
-    if(this.state.isABlogInEditing === true){
+  modifyBlog = (blogId) => {
+    if (this.state.isABlogInEditing === true) {
       alert("A blog is already in editing, please try again later")
-    }else{
-    this.setState({isABlogInEditing: true, blogIdInEditing:blogId})
+    } else {
+      this.setState({ isABlogInEditing: true, blogIdInEditing: blogId })
     }
   }
+
 
   saveChanges = (blogId, blogCountryName, blogCity, blogText, restId, restName, restLink, hotelId, hotelName, hotelLink, attractId,attractName, attractLink) =>{
     if ((blogCountryName === undefined)){
@@ -146,8 +148,13 @@ class App extends Component {
   
   render(){
     return (
+      <div className="App">
+      <Nav text="Talking Travel"/>
+      <div id="subHeader">
+        <h4>Welcome to the travel site that gives you a first-hand account of the places you want to visit</h4>
+        </div>
       <div>
-        <GetBlogs addBlogFunction={this.addBlog}/>
+        <GetBlogs addBlogFunction={this.addBlog} />
         {
           this.state.blogs.map((element, index)=>{
             if(this.state.isABlogInEditing){
@@ -172,26 +179,26 @@ class App extends Component {
                       saveChangeFunction={this.saveChanges}
                       discardChangeFunction={this.discardChanges}/>
               }
-            } else{
-              return(  
-                <ShowBlogs  key={index}
-                      blog_id={element.blog_id}
-                      user_name={element.user_name}
-                      blog_country_name={element.blog_country_name}
-                      blog_city={element.blog_city}
-                      blog_text={element.blog_text}
-                      rest_name={element.rest_name}
-                      rest_link={element.rest_link}
-                      hotel_name={element.hotel_name}
-                      hotel_link={element.hotel_link}
-                      attract_name={element.attract_name}
-                      attract_link={element.attract_link} 
-                      deleteBlogFunction={this.deleteBlog}
-                      modifyBlogFunction={this.modifyBlog}/>
-                   )
-              }
-            })
-          }
+            } else {
+              return (
+                <ShowBlogs key={index}
+                  blog_id={element.blog_id}
+                  user_name={element.user_name}
+                  blog_country_name={element.blog_country_name}
+                  blog_city={element.blog_city}
+                  blog_text={element.blog_text}
+                  rest_name={element.rest_name}
+                  rest_link={element.rest_link}
+                  hotel_name={element.hotel_name}
+                  hotel_link={element.hotel_link}
+                  attract_name={element.attract_name}
+                  attract_link={element.attract_link}
+                  deleteBlogFunction={this.deleteBlog}
+                  modifyBlogFunction={this.modifyBlog} />
+              )
+            }
+          })
+        }
       </div>
     );
   }
