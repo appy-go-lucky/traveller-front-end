@@ -84,6 +84,9 @@ class App extends Component {
       <div id="subHeader">
         <h4>Welcome to the travel site that gives you a first-hand account of the places you want to visit</h4>
         </div>
+        <div id="subHeader2">
+<h5>Select your destination below and check out the top hotels, restaurants and attractions in that area</h5>
+        </div>
       <div>
         <GetBlogs addBlogFunction={this.addBlog} />
         {

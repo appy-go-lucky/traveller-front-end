@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./GetBlogs.css";
 const countryList = require('country-list');
 
 class GetBlogs extends Component{
