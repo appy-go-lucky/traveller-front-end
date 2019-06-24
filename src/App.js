@@ -220,8 +220,7 @@ class App extends Component {
                     discardChangeFunction={this.discardChanges}/>
                 }
               } else {
-                return <div>
-                        <ShowBlogs key={index}
+                return<ShowBlogs key={index}
                           blog_id={element.blog_id}
                           user_name={element.user_name}
                           blog_country_name={element.blog_country_name}
@@ -235,7 +234,6 @@ class App extends Component {
                           attract_link={element.attract_link}
                           deleteBlogFunction={this.deleteBlog}
                           modifyBlogFunction={this.modifyBlog}/>
-                        </div>
                       }
                 })
               }

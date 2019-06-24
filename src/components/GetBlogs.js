@@ -86,6 +86,10 @@ class GetBlogs extends Component{
         this.setState({showForm: true})
     }
 
+    cancelClicked = () =>{
+        this.setState({showForm: false})
+    }
+
     render(){
         return (
             <div>
@@ -152,6 +156,11 @@ class GetBlogs extends Component{
                         <div className="col-12 text-center">
                             <button type="reset" className="btn btn-secondary"  onClick={this.addBlogClicked}>
                             Save blog
+                            </button>
+                        </div>
+                        <div className="col-12 text-center">
+                            <button type="reset" className="btn btn-secondary"  onClick={this.cancelClicked}>
+                            cancel
                             </button>
                         </div>
                   </div>
