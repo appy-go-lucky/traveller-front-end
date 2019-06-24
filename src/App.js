@@ -15,7 +15,8 @@ class App extends Component {
     isABlogInEditing: false,
     blogIdInEditing: 0,
     countriesAvailableToSelect:[],
-    filterByCountry: {filterOn:false, selectedCountry:""},
+    filteredCountry:"",
+    filterOn:false
   }
 
   componentWillMount() {
@@ -45,7 +46,7 @@ class App extends Component {
        })
   }
 
-  filterBlogCity
+  
 
   checkSwears=(blogText) => {
     blogText = blogText.split(" ");
@@ -99,7 +100,11 @@ class App extends Component {
       attract_link:attractLink  
      })
     .then(() => {
-      this.getBlogs();
+      if(this.state.filterOn){
+        this.filterBlog(this.state.filteredCountry)
+      }else{
+        this.getBlogs();
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -110,7 +115,11 @@ class App extends Component {
   deleteBlog = (blogId) => {
     axios.delete(`https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog/${blogId}`)
       .then(() => {
-        this.getBlogs();
+        if(this.state.filterOn){
+          this.filterBlog(this.state.filteredCountry)
+        }else{
+          this.getBlogs();
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -146,7 +155,11 @@ class App extends Component {
       attract_link:attractLink
      })
     .then(() => {
-      this.getBlogs();
+      if(this.state.filterOn){
+        this.filterBlog(this.state.filteredCountry)
+      }else{
+        this.getBlogs();
+      }
       this.setState({isABlogInEditing: false, blogIdInEditing:0})
     })
     .catch(function (error) {
@@ -164,7 +177,7 @@ class App extends Component {
     .then((response) => {
       let sortedBlogs = response.data.blogs;
       sortedBlogs.sort((a, b) => parseFloat(b.blog_id) - parseFloat(a.blog_id));
-      this.setState({blogs:sortedBlogs})
+      this.setState({blogs:sortedBlogs, filteredCountry:country})
     })
     .catch(function (error) {
         console.log(error);
@@ -172,8 +185,8 @@ class App extends Component {
   }
 
   resetFilter = () =>{
+    this.setState({filterOn:false})
     this.getBlogs()
-    this.setState({filterOn:false, selectedCountry:""})
   }
 
   
