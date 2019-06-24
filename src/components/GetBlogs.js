@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./GetBlogs.css";
 const countryList = require('country-list');
 
 class GetBlogs extends Component{
@@ -87,7 +88,7 @@ class GetBlogs extends Component{
                         <div className="row">
                             <div className="col-2">
                                 <select onChange={this.saveUser}>
-                                    <option value="0">Select a user below</option>
+                                    <option value="0">Select a traveller below</option>
                                         { 
                                             this.state.users.map((element, index)=>{
                                                 return <option key={index} value={element.user_id}>{element.user_name} 
@@ -98,7 +99,7 @@ class GetBlogs extends Component{
                             </div>
                             <div className="col-2">
                                 <select onChange={this.saveCountry}>
-                                    <option value="0">Select the blog country</option>
+                                    <option value="0">Select a country</option>
                                         { 
                                             this.state.countries.map((element, index)=>{
                                                 return <option key={index} value={element}>{element} 
@@ -109,19 +110,19 @@ class GetBlogs extends Component{
                             </div>
                         <div className="col-10">  
                             <input onChange={this.blogCityBoxChanged} className="form-control" type="text"
-                            placeholder="Blog City"/>
+                            placeholder="Destination"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.blogPostBoxChanged} className="form-control" type="text"
-                            placeholder="Blog post"/>
+                            placeholder="First-hand experience"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.restTextBoxChanged} className="form-control" type="text"
-                            placeholder="Resteraunt Text"/>
+                            placeholder="Where to eat?"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.restLinkBoxChanged} className="form-control" type="text"
-                            placeholder="Resteraunt Link"/>
+                            placeholder="Check it out"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.hotelTextBoxChanged} className="form-control" type="text"
@@ -133,15 +134,15 @@ class GetBlogs extends Component{
                         </div>
                         <div className="col-10">  
                             <input onChange={this.attractTextBoxChanged} className="form-control" type="text"
-                            placeholder="Attraction Text"/>
+                            placeholder="Where to go?"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.attractLinkBoxChanged} className="form-control" type="text"
-                            placeholder="Attraction Link"/>
+                            placeholder="Check it out"/>
                         </div>
                     <div className="col-12 text-center">
                         <button type="reset" className="btn btn-secondary"  onClick={this.addBlogClicked}>
-                        save blog post
+                        Save blog
                         </button>
                     </div>
                 </div>

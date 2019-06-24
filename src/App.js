@@ -148,17 +148,21 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-      <Nav text="Talking Travel"/>
-      <div id="subHeader">
-        <h4>Welcome to the travel site that gives you a first-hand account of the places you want to visit</h4>
+        <Nav text="Talking Travel" />
+        <div id="subHeader">
+          <h4>Welcome to the travel site that gives you first-hand experiences of the places you want to visit</h4>
         </div>
-      <div>
-        <GetBlogs addBlogFunction={this.addBlog} />
-        {
-          this.state.blogs.map((element, index)=>{
-            if(this.state.isABlogInEditing){
-              if(this.state.blogIdInEditing === element.blog_id){
-                return <EditBlog 
+        <div id="subHeader2">
+          <h6>Take a look at the recommendations below and check out the best hotels, restaurants and attractions in that area</h6>
+        </div>
+        <div>
+          <GetBlogs addBlogFunction={this.addBlog} />
+          {
+            this.state.blogs.map((element, index) => {
+              if (this.state.isABlogInEditing) {
+                if (this.state.blogIdInEditing === element.blog_id) {
+                  return <EditBlog
+                    key={index}
                       key={index}
                       blog_id={element.blog_id}
                       user_id={element.user_id}
@@ -177,28 +181,32 @@ class App extends Component {
                       attract_link={element.attract_link}
                       saveChangeFunction={this.saveChanges}
                       discardChangeFunction={this.discardChanges}/>
+                }
+              } else {
+                return (
+                  <ShowBlogs key={index}
+                    blog_id={element.blog_id}
+                    user_name={element.user_name}
+                    blog_country_name={element.blog_country_name}
+                    blog_city={element.blog_city}
+                    blog_text={element.blog_text}
+                    rest_name={element.rest_name}
+                    rest_link={element.rest_link}
+                    hotel_name={element.hotel_name}
+                    hotel_link={element.hotel_link}
+                    attract_name={element.attract_name}
+                    attract_link={element.attract_link}
+                    deleteBlogFunction={this.deleteBlog}
+                    modifyBlogFunction={this.modifyBlog} />
+                )
               }
-            } else{
-              return(  
-                <ShowBlogs  key={index}
-                      blog_id={element.blog_id}
-                      user_name={element.user_name}
-                      blog_country_name={element.blog_country_name}
-                      blog_city={element.blog_city}
-                      blog_text={element.blog_text}
-                      rest_name={element.rest_name}
-                      rest_link={element.rest_link}
-                      hotel_name={element.hotel_name}
-                      hotel_link={element.hotel_link}
-                      attract_name={element.attract_name}
-                      attract_link={element.attract_link} 
-                      deleteBlogFunction={this.deleteBlog}
-                      modifyBlogFunction={this.modifyBlog}/>
-                   )
-              }
-          })
-        }
-      </div>
+            })
+          }
+
+        </div>
+        <div id="Footer">
+          <p>Powered by 'Appy Go Lucky</p>
+        </div>
       </div>
     );
   }

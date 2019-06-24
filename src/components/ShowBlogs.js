@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './ShowBlogs.css';
 
 class ShowBlogs extends Component{
 
