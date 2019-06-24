@@ -163,24 +163,23 @@ class App extends Component {
                 if (this.state.blogIdInEditing === element.blog_id) {
                   return <EditBlog
                     key={index}
-                      key={index}
-                      blog_id={element.blog_id}
-                      user_id={element.user_id}
-                      user_name={element.user_name}
-                      blog_country_name={element.blog_country_name}
-                      blog_city={element.blog_city}
-                      blog_text={element.blog_text}
-                      rest_id={element.rest_id}
-                      rest_name={element.rest_name}
-                      rest_link={element.rest_link}
-                      hotel_id={element.hotel_id}
-                      hotel_name={element.hotel_name}
-                      hotel_link={element.hotel_link}
-                      attract_id={element.attract_id}
-                      attract_name={element.attract_name}
-                      attract_link={element.attract_link}
-                      saveChangeFunction={this.saveChanges}
-                      discardChangeFunction={this.discardChanges}/>
+                    blog_id={element.blog_id}
+                    user_id={element.user_id}
+                    user_name={element.user_name}
+                    blog_country_name={element.blog_country_name}
+                    blog_city={element.blog_city}
+                    blog_text={element.blog_text}
+                    rest_id={element.rest_id}
+                    rest_name={element.rest_name}
+                    rest_link={element.rest_link}
+                    hotel_id={element.hotel_id}
+                    hotel_name={element.hotel_name}
+                    hotel_link={element.hotel_link}
+                    attract_id={element.attract_id}
+                    attract_name={element.attract_name}
+                    attract_link={element.attract_link}
+                    saveChangeFunction={this.saveChanges}
+                    discardChangeFunction={this.discardChanges}/>
                 }
               } else {
                 return (
