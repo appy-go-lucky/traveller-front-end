@@ -4,6 +4,7 @@ import axios from "axios";
 import ShowBlogs from './components/ShowBlogs';
 import GetBlogs from './components/GetBlogs';
 import EditBlog from './components/EditBlog';
+import FilterBlogs from './components/FilterBlogs'
 import Nav from './components/Nav';
 
 
@@ -12,12 +13,25 @@ class App extends Component {
   state = {
     blogs: [],
     isABlogInEditing: false,
-    blogIdInEditing: 0
+    blogIdInEditing: 0,
+    countriesAvailableToSelect:[],
+    filterByCountry: {filterOn:false, selectedCountry:""},
   }
 
   componentWillMount() {
     this.getBlogs();
   }
+
+  filterBlogCountry = () =>{
+    let bloggedAboutCountries = []
+    this.state.blogs.forEach((element) =>{
+      if(bloggedAboutCountries.indexOf(element.blog_country_name) === -1){
+        bloggedAboutCountries.push(element.blog_country_name)
+      }
+    });
+    this.setState({countriesAvailableToSelect: bloggedAboutCountries, filterOn: true})
+  }
+
 
   getBlogs() {
     axios.get('https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blog')
@@ -31,17 +45,18 @@ class App extends Component {
        })
   }
 
+  filterBlogCity
+
   checkSwears=(blogText) => {
     blogText = blogText.split(" ");
     blogText = blogText.map((word) =>{
-      if((word === "shit") || (word === "cunt") || (word === "fuck") || (word === "twat")||
-        (word === "bastard")|| (word === "arse")){
+      let swears = ["shit","cunt", "fuck", "twat", "bastard", "arse"];
+      swears.forEach((element) =>{
+        if(word.toLowerCase().slice(0,element.length) === element){
           word = "****"
-          return word;
-        }else{
-          return word;
         }
-      
+      });
+      return word;
     })
     return blogText.toString().replace(/,/g, ' ');
   }
@@ -140,10 +155,27 @@ class App extends Component {
     }
   }
 
-
   discardChanges = () =>{
     this.setState({isABlogInEditing: false, blogIdInEditing:0})
   }
+
+  filterBlog = (country) =>{
+    axios.get(`https://v1mglih8ha.execute-api.eu-west-2.amazonaws.com/dev/traveller/blogbc/${country}`)
+    .then((response) => {
+      let sortedBlogs = response.data.blogs;
+      sortedBlogs.sort((a, b) => parseFloat(b.blog_id) - parseFloat(a.blog_id));
+      this.setState({blogs:sortedBlogs})
+    })
+    .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  resetFilter = () =>{
+    this.getBlogs()
+    this.setState({filterOn:false, selectedCountry:""})
+  }
+
   
   render(){
     return (
@@ -157,6 +189,12 @@ class App extends Component {
         </div>
         <div>
           <GetBlogs addBlogFunction={this.addBlog} />
+          <FilterBlogs 
+              filteredContent={this.state.filterOn}
+              countriesToFilterOn={this.state.countriesAvailableToSelect}
+              filterBlogCountryFunction={this.filterBlogCountry}
+              filterBlogClickedFunction={this.filterBlog}
+              resetFilterClickedFunction={this.resetFilter}/>
           {
             this.state.blogs.map((element, index) => {
               if (this.state.isABlogInEditing) {
@@ -182,26 +220,25 @@ class App extends Component {
                     discardChangeFunction={this.discardChanges}/>
                 }
               } else {
-                return (
-                  <ShowBlogs key={index}
-                    blog_id={element.blog_id}
-                    user_name={element.user_name}
-                    blog_country_name={element.blog_country_name}
-                    blog_city={element.blog_city}
-                    blog_text={element.blog_text}
-                    rest_name={element.rest_name}
-                    rest_link={element.rest_link}
-                    hotel_name={element.hotel_name}
-                    hotel_link={element.hotel_link}
-                    attract_name={element.attract_name}
-                    attract_link={element.attract_link}
-                    deleteBlogFunction={this.deleteBlog}
-                    modifyBlogFunction={this.modifyBlog} />
-                )
+                return <div>
+                        <ShowBlogs key={index}
+                          blog_id={element.blog_id}
+                          user_name={element.user_name}
+                          blog_country_name={element.blog_country_name}
+                          blog_city={element.blog_city}
+                          blog_text={element.blog_text}
+                          rest_name={element.rest_name}
+                          rest_link={element.rest_link}
+                          hotel_name={element.hotel_name}
+                          hotel_link={element.hotel_link}
+                          attract_name={element.attract_name}
+                          attract_link={element.attract_link}
+                          deleteBlogFunction={this.deleteBlog}
+                          modifyBlogFunction={this.modifyBlog}/>
+                        </div>
+                      }
+                })
               }
-            })
-          }
-
         </div>
         <div id="Footer">
           <p>Powered by 'Appy Go Lucky</p>
