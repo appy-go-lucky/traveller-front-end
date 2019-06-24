@@ -34,14 +34,13 @@ class App extends Component {
   checkSwears=(blogText) => {
     blogText = blogText.split(" ");
     blogText = blogText.map((word) =>{
-      if((word === "shit") || (word === "cunt") || (word === "fuck") || (word === "twat")||
-        (word === "bastard")|| (word === "arse")){
+      let swears = ["shit","cunt", "fuck", "twat", "bastard", "arse"];
+      swears.forEach((element) =>{
+        if(word.toLowerCase().slice(0,element.length) === element){
           word = "****"
-          return word;
-        }else{
-          return word;
         }
-      
+      });
+      return word;
     })
     return blogText.toString().replace(/,/g, ' ');
   }
