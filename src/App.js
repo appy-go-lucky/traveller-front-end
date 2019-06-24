@@ -185,7 +185,7 @@ class App extends Component {
   }
 
   resetFilter = () =>{
-    this.setState({filterOn:false})
+    this.setState({filterOn:false, filteredCountry:""})
     this.getBlogs()
   }
 
