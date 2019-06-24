@@ -117,20 +117,20 @@ class GetBlogs extends Component{
                             placeholder="First-hand experience"/>
                         </div>
                         <div className="col-10">  
-                            <input onChange={this.hotelTextBoxChanged} className="form-control" type="text"
-                            placeholder="Where to stay?"/>
-                        </div>
-                        <div className="col-10">  
-                            <input onChange={this.hotelLinkBoxChanged} className="form-control" type="text"
-                            placeholder="Check it out"/>
-                        </div>
-                        <div className="col-10">  
                             <input onChange={this.restTextBoxChanged} className="form-control" type="text"
                             placeholder="Where to eat?"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.restLinkBoxChanged} className="form-control" type="text"
                             placeholder="Check it out"/>
+                        </div>
+                        <div className="col-10">  
+                            <input onChange={this.hotelTextBoxChanged} className="form-control" type="text"
+                            placeholder="Hotel Text"/>
+                        </div>
+                        <div className="col-10">  
+                            <input onChange={this.hotelLinkBoxChanged} className="form-control" type="text"
+                            placeholder="Hotel Link"/>
                         </div>
                         <div className="col-10">  
                             <input onChange={this.attractTextBoxChanged} className="form-control" type="text"
