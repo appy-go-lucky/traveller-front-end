@@ -9,7 +9,8 @@ class GetBlogs extends Component{
         blog:{blog_text:"", blog_country_name:"", blog_city:"", user_id:0, hotel_name:"",
               hotel_link:"", rest_name:"", rest_link:"", attract_name:"", attract_link:""},
         users:[],
-        countries:[]
+        countries:[],
+        showForm:false
     }
     
     componentWillMount(){
@@ -78,12 +79,20 @@ class GetBlogs extends Component{
                                    this.state.hotel_name,this.state.hotel_link,
                                    this.state.rest_name,this.state.rest_link,
                                    this.state.attract_name,this.state.attract_link);
+        this.setState({showForm:false})
         } 
+    
+    showBlogFormClicked = () =>{
+        this.setState({showForm: true})
+    }
 
     render(){
         return (
             <div>
-                <div className="container generalContent">
+                <div className="container generalContent">{!this.state.showForm ? <div className="col-12 text-center">
+                            <button type="reset" className="btn btn-secondary"  onClick={this.showBlogFormClicked}>
+                            Add Blog
+                            </button></div>:
                     <form className="formInTheCentre">
                         <div className="row">
                             <div className="col-2">
@@ -140,15 +149,15 @@ class GetBlogs extends Component{
                             <input onChange={this.attractLinkBoxChanged} className="form-control" type="text"
                             placeholder="Check it out"/>
                         </div>
-                    <div className="col-12 text-center">
-                        <button type="reset" className="btn btn-secondary"  onClick={this.addBlogClicked}>
-                        Save blog
-                        </button>
-                    </div>
-                </div>
-            </form>
+                        <div className="col-12 text-center">
+                            <button type="reset" className="btn btn-secondary"  onClick={this.addBlogClicked}>
+                            Save blog
+                            </button>
+                        </div>
+                  </div>
+           </form>}
         </div>
-            </div>
+        </div>
         ) 
     }
 }
