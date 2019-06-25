@@ -28,9 +28,9 @@ class FilterBlogs extends Component{
     render(){
         return (
             <div className="container" >{this.state.filterOn ? 
-                <div><button className="btn btn-secondary" type="button"onClick={this.resetFilterClicked}>reset filter</button></div>:
-                <div className="col-md-2 col-12 text-center">{this.props.filteredContent ? 
-                <div className="col-2">
+                <div className="col-12 text-right"><button className="btn btn-secondary" type="button"onClick={this.resetFilterClicked}>reset filter</button></div>:
+                <div className="col-12 text-right">{this.props.filteredContent ? 
+                <div className="col-12">
                         <select onChange={this.saveFilteredCountry}>
                             <option value="0">Select a country to filter on</option>
                                 { 
