@@ -1,4 +1,9 @@
-body {
+#show {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    border-bottom-style: double;
+    border-bottom-color: rgba(40, 170, 221, 0.965);
+    padding-bottom: 25px;
+    padding-top: 10px;
+    background-color: white;
 }
 

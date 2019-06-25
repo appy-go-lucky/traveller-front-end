@@ -110,9 +110,9 @@ class GetBlogs extends Component{
                                         }
                                 </select >
                             </div>
-                            <div className="col-2">
+                            <div className="col-12">
                                 <select onChange={this.saveCountry}>
-                                    <option value="0">Select a country</option>
+                                    <option value="0">Select a destination country</option>
                                         { 
                                             this.state.countries.map((element, index)=>{
                                                 return <option key={index} value={element}>{element} 
@@ -121,44 +121,44 @@ class GetBlogs extends Component{
                                         }
                                 </select >
                             </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.blogCityBoxChanged} className="form-control" type="text"
                             placeholder="Destination"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.blogPostBoxChanged} className="form-control" type="text"
                             placeholder="First-hand experience"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.restTextBoxChanged} className="form-control" type="text"
                             placeholder="Where to eat?"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.restLinkBoxChanged} className="form-control" type="text"
                             placeholder="Check it out"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.hotelTextBoxChanged} className="form-control" type="text"
                             placeholder="Hotel Text"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.hotelLinkBoxChanged} className="form-control" type="text"
                             placeholder="Hotel Link"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.attractTextBoxChanged} className="form-control" type="text"
                             placeholder="Where to go?"/>
                         </div>
-                        <div className="col-10">  
+                        <div className="col-12">  
                             <input onChange={this.attractLinkBoxChanged} className="form-control" type="text"
                             placeholder="Check it out"/>
                         </div>
-                        <div className="col-12 text-center">
+                        <div className="col-6 text-center">
                             <button type="reset" className="btn btn-secondary"  onClick={this.addBlogClicked}>
                             Save blog
                             </button>
                         </div>
-                        <div className="col-12 text-center">
+                        <div className="col-6 text-center">
                             <button type="reset" className="btn btn-secondary"  onClick={this.cancelClicked}>
                             cancel
                             </button>
