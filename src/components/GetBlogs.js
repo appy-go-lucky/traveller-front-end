@@ -123,11 +123,11 @@ class GetBlogs extends Component{
                             </div>
                         <div className="col-12">  
                             <input onChange={this.blogCityBoxChanged} className="form-control" type="text"
-                            placeholder="Destination"/>
+                            placeholder="Destination name (region/city/town)"/>
                         </div>
                         <div className="col-12">  
                             <input onChange={this.blogPostBoxChanged} className="form-control" type="text"
-                            placeholder="First-hand experience"/>
+                            placeholder="Describe your first-hand experience"/>
                         </div>
                         <div className="col-12">  
                             <input onChange={this.restTextBoxChanged} className="form-control" type="text"
