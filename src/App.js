@@ -51,7 +51,7 @@ class App extends Component {
   checkSwears=(blogText) => {
     blogText = blogText.split(" ");
     blogText = blogText.map((word) =>{
-      let swears = ["shit","cunt", "fuck", "twat", "bastard", "arse", "damn"];
+      let swears = ["shit", "fuck", "twat", "bastard", "arse", "damn"];
       swears.forEach((element) =>{
         if(word.toLowerCase().slice(0,element.length) === element){
           word = "****"
@@ -199,7 +199,7 @@ class App extends Component {
           <h4>Welcome to the travel site that gives you first-hand experiences of the places you want to visit</h4>
         </div>
         <div className="col-12"id="subHeader2">
-          <h6>Take a look at the recommendations below and check out the best hotels, restaurants and attractions in that area</h6>
+          <h5>Take a look at the recommendations below and check out the best hotels, restaurants and attractions in that area</h5>
         </div>
         <div>
           <GetBlogs addBlogFunction={this.addBlog} />
